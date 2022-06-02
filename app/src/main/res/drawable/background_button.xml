@@ -6,5 +6,9 @@
         android:bottom="15px"
         android:left="45px"
         android:right="45px"
-        android:top="15px" />
+        android:top="15px"/>
+
+    <corners
+        android:radius="100dp"/>
+
 </shape>
