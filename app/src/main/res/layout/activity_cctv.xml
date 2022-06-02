@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context=".cctvActivity">
+
+    <TextView
+        android:id="@+id/clock"
+        android:layout_width="match_parent"
+        android:layout_height="122dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/background_clock"
+        android:text=""
+        android:textAlignment="center"
+        android:textSize="50dp" />
+
+    <WebView
+        android:id="@+id/cctvWeb"
+        android:layout_width="match_parent"
+        android:layout_height="500dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@color/black"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/outhome"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="2"
+            android:background="@drawable/round"
+            android:src="@drawable/background_outhome"
+            android:scaleType="fitCenter"/>
+
+        <ImageButton
+            android:id="@+id/callpolice"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="2"
+            android:background="@drawable/round"
+            android:src="@drawable/background_callpolice"
+            android:scaleType="fitCenter"/>
+
+        <ImageButton
+            android:id="@+id/recode"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="2"
+            android:background="@drawable/round"
+            android:src="@drawable/background_record"
+            android:scaleType="fitCenter"/>
+
+        <ImageButton
+            android:id="@+id/warning"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="2"
+            android:background="@drawable/round"
+            android:src="@drawable/background_warning"
+            android:scaleType="fitCenter"/>
+
+    </LinearLayout>
+</LinearLayout>
