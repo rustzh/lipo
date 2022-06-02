@@ -5,14 +5,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Switch;
@@ -20,12 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import java.io.IOException;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class cctvActivity extends AppCompatActivity {
     final String TAG = "TAG+CCTVFragment";
     ImageButton callpolice, recode, warning;
-    //    ToggleButton outhome;
 //    WebView webView;
     WebSettings webSettings;
 //    TextView callText;
