@@ -3,12 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
         <entry key="..\:/Users/soons/AndroidStudioProjects/lipo/app/src/main/res/drawable/backgourn_button.xml" value="0.1925" />
         <entry key="..\:/Users/soons/AndroidStudioProjects/lipo/app/src/main/res/drawable/background_clock.xml" value="0.28" />
         <entry key="..\:/Users/soons/AndroidStudioProjects/lipo/app/src/main/res/drawable/bg_gis_result_items_count.xml" value="0.2765" />
         <entry key="..\:/Users/soons/AndroidStudioProjects/lipo/app/src/main/res/drawable/cctv_on_off_setting.xml" value="0.28" />
         <entry key="..\:/Users/soons/AndroidStudioProjects/lipo/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2325" />
         <entry key="..\:/Users/soons/AndroidStudioProjects/lipo/app/src/main/res/layout/activity_main.xml" value="0.25" />
+=======
+        <entry key="..\:/Users/soons/AndroidStudioProjects/lipo/app/src/main/res/layout/activity_main.xml" value="0.2755208333333333" />
+>>>>>>> b6a399fd6a75160a8822cab5664af54549f387c8
         <entry key="..\:/Users/soons/lipo/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.22" />
         <entry key="..\:/Users/soons/lipo/app/src/main/res/drawable/background_splash.xml" value="0.22" />
         <entry key="..\:/Users/soons/lipo/app/src/main/res/drawable/bg_gis_result_items_count.xml" value="0.28" />
@@ -18,6 +22,19 @@
         <entry key="..\:/Users/soons/lipo/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1375" />
         <entry key="..\:/Users/soons/lipo/app/src/main/res/mipmap-anydpi-v26/ic_launcher_lipo.xml" value="0.1375" />
         <entry key="..\:/Users/soons/lipo/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1375" />
+        <entry key="..\:/Users/user/StudioProjects/m_project/last_lipo/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/user/StudioProjects/m_project/last_lipo/app/src/main/res/drawable/background_button.xml" value="0.2205" />
+        <entry key="..\:/Users/user/StudioProjects/m_project/last_lipo/app/src/main/res/drawable/background_callpolice.xml" value="0.1" />
+        <entry key="..\:/Users/user/StudioProjects/m_project/last_lipo/app/src/main/res/drawable/background_clock.xml" value="0.1" />
+        <entry key="..\:/Users/user/StudioProjects/m_project/last_lipo/app/src/main/res/drawable/background_outhome.xml" value="0.2" />
+        <entry key="..\:/Users/user/StudioProjects/m_project/last_lipo/app/src/main/res/drawable/background_record.xml" value="0.1" />
+        <entry key="..\:/Users/user/StudioProjects/m_project/last_lipo/app/src/main/res/drawable/background_splash.xml" value="0.1" />
+        <entry key="..\:/Users/user/StudioProjects/m_project/last_lipo/app/src/main/res/drawable/background_warning.xml" value="0.1" />
+        <entry key="..\:/Users/user/StudioProjects/m_project/last_lipo/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/user/StudioProjects/m_project/last_lipo/app/src/main/res/drawable/round.xml" value="0.118" />
+        <entry key="..\:/Users/user/StudioProjects/m_project/last_lipo/app/src/main/res/drawable/shape_for_circle.xml" value="0.227" />
+        <entry key="..\:/Users/user/StudioProjects/m_project/last_lipo/app/src/main/res/layout/activity_cctv.xml" value="0.4" />
+        <entry key="..\:/Users/user/StudioProjects/m_project/last_lipo/app/src/main/res/layout/activity_main.xml" value="0.11944444444444445" />
       </map>
     </option>
   </component>
