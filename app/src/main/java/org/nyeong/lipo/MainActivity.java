@@ -1,7 +1,8 @@
 package org.nyeong.lipo;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -19,7 +20,29 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        cctvButton = (Button) findViewById(R.id.cctvButton);
+
+        // 버튼 받아오기
+        ImageButton cctvOnButton = (ImageButton) findViewById(R.id.cctvOnButton);
+        Button videoList = (Button) findViewById(R.id.videoList);
+
+        // cctv 화면으로 넘어가는 기능
+        cctvOnButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(getApplicationContext(), cctvActivity.class);
+                startActivity(intent);
+            }
+        });
+
+//        // 녹화 목록 화면으로 넘어가는 기능
+//        videoList.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view){
+//                Intent intent = new Intent(getApplicationContext(), videoActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+
         final TextView clock = (TextView) findViewById(R.id.clock);
 
         (new Thread(new Runnable()
