@@ -18,12 +18,14 @@ import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.io.IOException;
 
 public class cctvActivity extends AppCompatActivity {
     final String TAG = "TAG+CCTVFragment";
-    ImageButton outhome, callpolice, recode, warning;
+    ImageButton callpolice, recode, warning;
+    //    ToggleButton outhome;
 //    WebView webView;
     WebSettings webSettings;
 //    TextView callText;
@@ -34,17 +36,17 @@ public class cctvActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cctv);
 
-        Log.d(TAG,"Create CCTV Fragment");
+        Log.d(TAG, "Create CCTV Fragment");
 
 //        webView = (WebView) findViewById(R.id.cctvWeb);
 //        callText = (TextView) findViewById(R.id.callText);
-        outhome = (ImageButton) findViewById(R.id.outhome);
+//        outhome = (ToggleButton) findViewById(R.id.outhome);
         callpolice = (ImageButton) findViewById(R.id.callpolice);
         recode = (ImageButton) findViewById(R.id.recode);
         warning = (ImageButton) findViewById(R.id.warning);
 
 //        webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
+//        webSettings.setJavaScriptEnabled(true);
 
 //        webView.loadData("<html><head><style type='text/css'>body{margin:auto auto;text-align:center;} " +
 //                        "img{width:100%25;} div{overflow: hidden;} </style></head>" +
@@ -61,22 +63,29 @@ public class cctvActivity extends AppCompatActivity {
 //            }
 //        }); // WebView 터치 시 새로고침
 
+//        @Override
+//        outhome.setOnClickListener(new View.setOnClickListener() {
+////            @Override
+//            public void onCheckedChanged(View buttonView, boolean isChecked) {
+//                if(isChecked) {
+//                    Toast.makeText(getApplicationContext(), "checked", Toast.LENGTH_LONG).show();
+//                }
+//                else {
+//                    Toast.makeText(getApplicationContext(), "unchecked", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        }); // 외출모드
 
-        outhome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-//                        try {
-//                            ((MainActivity)MainActivity.context).tcpThread.cctvOn();
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        }
-                    }
-                }).start();
+        ToggleButton toggleButton = (ToggleButton) findViewById(R.id.outhome);
+        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    Toast.makeText(getApplicationContext(), "외출 중", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "집!", Toast.LENGTH_SHORT).show();
+                }
             }
-        }); // 외출모드
+        });
 
         callpolice.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,3 +144,4 @@ public class cctvActivity extends AppCompatActivity {
         }); // 신고하기 버튼 클릭 시 112 전화걸기로 이동
     }
 }
+
