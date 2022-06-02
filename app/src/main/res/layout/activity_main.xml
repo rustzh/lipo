@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
     <TextView
@@ -14,6 +15,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10sp"
         android:background="@drawable/bg_gis_result_items_count"
-        android:text=" "
+        android:text=""
         android:textSize="50dp" />
+
 </RelativeLayout>
