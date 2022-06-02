@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
-            android:name=".SlashActivity"
+            android:name=".SplashActivity"
             android:theme="@style/SplashTheme"
             android:screenOrientation="portrait"
             android:exported="true">
