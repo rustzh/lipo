@@ -11,11 +11,24 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 01dffcb26f9b8763c5501159f30e21d98f2ffe61
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+<<<<<<< HEAD
+>>>>>>> 37b900c18be6262f4cc7e19bc19d6c62961d8018
+=======
 
+<<<<<<< HEAD
+=======
+>>>>>>> 01dffcb26f9b8763c5501159f30e21d98f2ffe61
+
+>>>>>>> e0d32f436b5b978f27610d34e871f865252f935a
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
