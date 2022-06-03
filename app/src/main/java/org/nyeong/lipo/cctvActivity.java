@@ -16,8 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.IOException;
 
 public class cctvActivity extends AppCompatActivity {
     final String TAG = "TAG+CCTVFragment";
