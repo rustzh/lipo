@@ -25,7 +25,7 @@ public class cctvActivity extends AppCompatActivity {
     ImageButton callpolice, warning;
 //    WebView webView;
     WebSettings webSettings;
-    boolean i = true;
+    boolean IsOutHome = true;
 
     @SuppressLint({"ClickableViewAccessibility", "SetJavaScriptEnabled"})
     @Override
@@ -85,12 +85,14 @@ public class cctvActivity extends AppCompatActivity {
         ToggleButton toggleButton = (ToggleButton) findViewById(R.id.out_home_home);
         toggleButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (toggleButton.isChecked() && i==true) {
+                if (toggleButton.isChecked() && IsOutHome==false) {
                     toggleButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.home));
-                    i = false;
+                    IsOutHome = true;
+//                    Client.main();
+
                 } else {
                     toggleButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.out_home));
-                    i = true;
+                    IsOutHome = false;
                 }
             }
         }); // 외출모드

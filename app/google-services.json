@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "794139407954",
+    "project_id": "lipo-cf566",
+    "storage_bucket": "lipo-cf566.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:794139407954:android:2f251dbef5fc36a2c5118b",
+        "android_client_info": {
+          "package_name": "org.nyeong.lipo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "794139407954-lr5t9nccifqgba7pje1k8n4ajolr004e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWV9wRfo_6VOmw7uHyUN_9fsWBsNga3vE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "794139407954-lr5t9nccifqgba7pje1k8n4ajolr004e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
