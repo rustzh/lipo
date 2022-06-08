@@ -27,7 +27,7 @@ public class cctvActivity extends AppCompatActivity {
     ImageButton callpolice, warning;
 //    WebView webView;
     WebSettings webSettings;
-    boolean IsOutHome = true;
+    boolean IsOutHome = false;
 
     @SuppressLint({"ClickableViewAccessibility", "SetJavaScriptEnabled"})
     @Override
