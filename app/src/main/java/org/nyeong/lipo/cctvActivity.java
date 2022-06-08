@@ -11,22 +11,14 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
-<<<<<<< HEAD
-import android.widget.Toast;
-import android.widget.ToggleButton;
-
-=======
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
->>>>>>> 3e791611049201bba7db9f90946dc7436d47ee40
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import java.io.IOException;
 
 public class cctvActivity extends AppCompatActivity {
     final String TAG = "TAG+CCTVFragment";
