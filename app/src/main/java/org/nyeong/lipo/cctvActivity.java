@@ -10,22 +10,37 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class cctvActivity extends AppCompatActivity {
+
+    FirebaseDatabase database;
+    DatabaseReference stateRef;
+
     final String TAG = "TAG+CCTVFragment";
-    ImageButton callpolice, warning;
+    ImageButton callpolice, recording, warning;
 //    WebView webView;
     WebSettings webSettings;
     boolean IsOutHome = false;
+    boolean IsRecording = false;
+    boolean IsWarning = false;
 
     @SuppressLint({"ClickableViewAccessibility", "SetJavaScriptEnabled"})
     @Override
@@ -33,10 +48,14 @@ public class cctvActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cctv);
 
+        database = FirebaseDatabase.getInstance("https://lipo-cf566-default-rtdb.firebaseio.com/");
+        stateRef = database.getReference("state");
+
         Log.d(TAG, "Create CCTV Fragment");
 
 //        webView = (WebView) findViewById(R.id.cctvWeb);
         callpolice = (ImageButton) findViewById(R.id.callpolice);
+        recording = (ImageButton) findViewById(R.id.recoding);
         warning = (ImageButton) findViewById(R.id.warning);
 
 //        webSettings = webView.getSettings();
@@ -85,44 +104,32 @@ public class cctvActivity extends AppCompatActivity {
         ToggleButton toggleButton = (ToggleButton) findViewById(R.id.out_home_home);
         toggleButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (toggleButton.isChecked() && IsOutHome==false) {
-                    toggleButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.home));
-                    IsOutHome = true;
-//                    Client.main();
-
-                } else {
+                if (toggleButton.isChecked()&&IsOutHome==false) {
                     toggleButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.out_home));
+                    IsOutHome = true;
+                    stateRef.child("outhome").setValue(1);
+                    Toast.makeText(getApplicationContext(), "외출 중", Toast.LENGTH_SHORT).show();
+                } else {
+                    toggleButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.home));
                     IsOutHome = false;
+                    stateRef.child("outhome").setValue(0);
+                    Toast.makeText(getApplicationContext(), "귀가", Toast.LENGTH_SHORT).show();
                 }
             }
         }); // 외출모드
 
-//        out_home_home.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                new Thread(new Runnable() {
-//                    @Override
-//                    public void run() {
-////                        try {
-////                            ((MainActivity)MainActivity.context).tcpThread.cctvOff();
-////                        } catch (IOException e) {
-////                            e.printStackTrace();
-////                        }
-//                    }
-//                }).start();
-//            }
-//        }); // 경고음 출력
-
-        ToggleButton toggleButton2 = (ToggleButton) findViewById(R.id.recode);
-        toggleButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    Toast.makeText(getApplicationContext(), "녹화 중", Toast.LENGTH_SHORT).show();
+        recording.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(IsRecording==false) {
+                    stateRef.child("recording").setValue(1);
+                    IsRecording = true;
                 } else {
-                    Toast.makeText(getApplicationContext(), "정지", Toast.LENGTH_SHORT).show();
+                    stateRef.child("recording").setValue(0);
+                    IsRecording = false;
                 }
             }
-        });  // 녹화
+        }); // 녹화
 
         callpolice.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,20 +158,18 @@ public class cctvActivity extends AppCompatActivity {
         warning.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-//                        try {
-//                            ((MainActivity)MainActivity.context).tcpThread.cctvOff();
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        }
-                    }
-                }).start();
+                if(IsWarning==false) {
+                    stateRef.child("warning").setValue(1);
+                    IsWarning = true;
+                } else {
+                    stateRef.child("warning").setValue(0);
+                    IsWarning = false;
+                }
             }
         }); // 경고음 출력
 
     }
+
     public String getCurrentTime(){
         long time = System.currentTimeMillis();
         SimpleDateFormat dayTime = new SimpleDateFormat("MM-dd hh:mm");
