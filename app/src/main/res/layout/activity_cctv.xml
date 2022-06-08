@@ -30,7 +30,7 @@ tools:context=".cctvActivity">
         android:orientation="horizontal">
 
         <ToggleButton
-            android:id="@+id/outhome"
+            android:id="@+id/out_home_home"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -39,8 +39,8 @@ tools:context=".cctvActivity">
             android:layout_marginBottom="10dp"
             android:layout_weight="2"
             android:scaleType="fitCenter"
-            android:background="@drawable/outhome"
-            android:onCheckedChanged="onCheckedChanged"/>
+            android:background="@drawable/home"
+            />
 
         <ImageButton
             android:id="@+id/callpolice"
@@ -54,17 +54,17 @@ tools:context=".cctvActivity">
             android:scaleType="fitCenter"
             android:src="@drawable/background_callpolice" />
 
-        <ImageButton
+        <ToggleButton
             android:id="@+id/recode"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:background="@color/white"
             android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="2"
             android:scaleType="fitCenter"
-            android:src="@drawable/background_record" />
+            android:background="@drawable/record"
+            />
 
         <ImageButton
             android:id="@+id/warning"
