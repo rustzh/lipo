@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="org.nyeong.lipo">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.sensor.stepdetector" />
 
     <application
         android:allowBackup="true"
@@ -8,7 +12,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_lipo_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:usesCleartextTraffic="true">
+
+        <activity android:name=".MainActivity" />
+        <activity android:name=".cctvActivity" />
+
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme"
@@ -20,8 +29,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".cctvActivity"></activity>
+
     </application>
+
 
 </manifest>

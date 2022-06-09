@@ -7,12 +7,23 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
+
+    FirebaseDatabase database;
+    DatabaseReference stateRef;
+    String cctvState;
 
 //    public static Context context;
 
@@ -20,6 +31,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        database = FirebaseDatabase.getInstance("https://lipo-cf566-default-rtdb.firebaseio.com/");
+        stateRef = database.getReference("state");
+
+        stateRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                cctvState = snapshot.child("cctv_state").getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        if(cctvState == "on"){
+            finish();
+            startActivity(new Intent(getApplicationContext(), cctvActivity.class));
+        }
+
 
         // 버튼 받아오기
         ImageButton cctvOnButton = (ImageButton) findViewById(R.id.cctvOnButton);
@@ -29,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         cctvOnButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                stateRef.child("cctv_state").setValue("on");
                 Intent intent = new Intent(getApplicationContext(), cctvActivity.class);
                 startActivity(intent);
             }

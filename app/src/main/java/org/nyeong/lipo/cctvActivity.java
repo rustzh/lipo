@@ -7,8 +7,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -21,8 +23,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,8 +41,8 @@ public class cctvActivity extends AppCompatActivity {
 
     final String TAG = "TAG+CCTVFragment";
     ImageButton callpolice, recording, warning;
-//    WebView webView;
-    WebSettings webSettings;
+    WebView cctvWebView;  // 웹뷰 선언
+    WebSettings cctvWebSettings; // 웹뷰 세팅
     boolean IsOutHome = false;
     boolean IsRecording = false;
     boolean IsWarning = false;
@@ -53,28 +58,28 @@ public class cctvActivity extends AppCompatActivity {
 
         Log.d(TAG, "Create CCTV Fragment");
 
-//        webView = (WebView) findViewById(R.id.cctvWeb);
+        cctvWebView = (WebView) findViewById(R.id.cctvWeb);
         callpolice = (ImageButton) findViewById(R.id.callpolice);
         recording = (ImageButton) findViewById(R.id.recoding);
         warning = (ImageButton) findViewById(R.id.warning);
 
-//        webSettings = webView.getSettings();
-//        webSettings.setJavaScriptEnabled(true);
+        cctvWebSettings = cctvWebView.getSettings(); // 세부 세팅 등록
 
-//        webView.loadData("<html><head><style type='text/css'>body{margin:auto auto;text-align:center;} " +
-//                        "img{width:100%25;} div{overflow: hidden;} </style></head>" +
-//                        "<body><div><img src='http://" + ((MainActivity)MainActivity.context).tcpThread.ip + ":8082/'/></div></body></html>",
-//                "text/html", "UTF-8");
-        // WebView 에 CCTV 화면 띄움
-//        webView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-//                    webView.reload();
-//                }
-//                return true;
-//            }
-//        }); // WebView 터치 시 새로고침
+        cctvWebSettings.setUseWideViewPort(true); // 화면 사이즈 맞추기 허용 여부
+        cctvWebSettings.setJavaScriptEnabled(true); // 웹페이지 자바 스틀비트 허용 여부
+        cctvWebSettings.setLoadWithOverviewMode(true);
+
+        cctvWebView.loadUrl("192.168.0.48:8090/?action=stream"); // 웹뷰에 표시할 라즈베리파이 주소, 웹뷰 시작
+
+        cctvWebView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    cctvWebView.reload();
+                }
+                return true;
+            }
+        }); // WebView 터치 시 새로고침
 
         final TextView clock = (TextView) findViewById(R.id.clock);
 
