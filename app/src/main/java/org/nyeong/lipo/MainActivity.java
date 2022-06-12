@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference stateRef;
     String cctvState;
+    int IsRecording;
 
 //    public static Context context;
 
@@ -52,9 +53,27 @@ public class MainActivity extends AppCompatActivity {
         cctvOnButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                stateRef.child("cctv_state").setValue("on");
-                Intent intent = new Intent(getApplicationContext(), cctvActivity.class);
-                startActivity(intent);
+//                stateRef.child("cctv_state").setValue("on");
+                stateRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        IsRecording = snapshot.child("recording").getValue(Integer.class);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+                if (IsRecording == 0) {
+                    Intent intent = new Intent(getApplicationContext(), cctvActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(getApplicationContext(), recordingActivity.class);
+                    startActivity(intent);
+                }
+
             }
         });
 
@@ -62,7 +81,11 @@ public class MainActivity extends AppCompatActivity {
         videoList.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+<<<<<<< HEAD
                 Intent intent = new Intent(getApplicationContext(), cctvlistActivity.class);
+=======
+                Intent intent = new Intent(getApplicationContext(), AdapterActivity.class);
+>>>>>>> 98df30698fe1096c7cf5d1f4a4439450e0e456d9
                 startActivity(intent);
             }
         });

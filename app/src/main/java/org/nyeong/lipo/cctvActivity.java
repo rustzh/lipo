@@ -1,6 +1,7 @@
 package org.nyeong.lipo;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,8 +22,10 @@ import android.widget.ToggleButton;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,11 +44,13 @@ public class cctvActivity extends AppCompatActivity {
 
     final String TAG = "TAG+CCTVFragment";
     ImageButton callpolice, recording, warning;
+    ToggleButton toggleButton;
+
     WebView cctvWebView;  // 웹뷰 선언
     WebSettings cctvWebSettings; // 웹뷰 세팅
-    boolean IsOutHome = false;
-    boolean IsRecording = false;
+    int IsOutHome = 0;
     boolean IsWarning = false;
+    int IsRecording = 0;
 
     @SuppressLint({"ClickableViewAccessibility", "SetJavaScriptEnabled"})
     @Override
@@ -62,6 +67,25 @@ public class cctvActivity extends AppCompatActivity {
         callpolice = (ImageButton) findViewById(R.id.callpolice);
         recording = (ImageButton) findViewById(R.id.recoding);
         warning = (ImageButton) findViewById(R.id.warning);
+        toggleButton = (ToggleButton) findViewById(R.id.out_home_home);
+
+        stateRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                IsOutHome = snapshot.child("outhome").getValue(Integer.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        if (IsOutHome==0) {
+            toggleButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.home));
+        } else {
+            toggleButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.out_home));
+        }
 
         cctvWebSettings = cctvWebView.getSettings(); // 세부 세팅 등록
 
@@ -106,17 +130,16 @@ public class cctvActivity extends AppCompatActivity {
             }
         })).start();
 
-        ToggleButton toggleButton = (ToggleButton) findViewById(R.id.out_home_home);
         toggleButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (toggleButton.isChecked()&&IsOutHome==false) {
+                if (toggleButton.isChecked()&&IsOutHome==0) {
                     toggleButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.out_home));
-                    IsOutHome = true;
+                    IsOutHome = 1;
                     stateRef.child("outhome").setValue(1);
                     Toast.makeText(getApplicationContext(), "외출 중", Toast.LENGTH_SHORT).show();
                 } else {
                     toggleButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.home));
-                    IsOutHome = false;
+                    IsOutHome = 0;
                     stateRef.child("outhome").setValue(0);
                     Toast.makeText(getApplicationContext(), "귀가", Toast.LENGTH_SHORT).show();
                 }
@@ -126,13 +149,22 @@ public class cctvActivity extends AppCompatActivity {
         recording.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(IsRecording==false) {
-                    stateRef.child("recording").setValue(1);
-                    IsRecording = true;
-                } else {
-                    stateRef.child("recording").setValue(0);
-                    IsRecording = false;
-                }
+//                if(IsRecording == 0) {
+//                    stateRef.child("recording").setValue(1);
+//                    IsRecording = 1;
+//                    Toast.makeText(getApplicationContext(), "녹화 중", Toast.LENGTH_SHORT).show();
+//
+//                } else {
+//                    stateRef.child("recording").setValue(0);
+//                    IsRecording = 0;
+//                    Toast.makeText(getApplicationContext(), "녹화 종료", Toast.LENGTH_SHORT).show();
+//
+//                }
+                stateRef.child("recording").setValue(1);
+                IsRecording = 1;
+                Toast.makeText(getApplicationContext(), "녹화 중", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), recordingActivity.class);
+                startActivity(intent);
             }
         }); // 녹화
 
