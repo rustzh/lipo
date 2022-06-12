@@ -58,14 +58,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        // 녹화 목록 화면으로 넘어가는 기능
-//        videoList.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View view){
-//                Intent intent = new Intent(getApplicationContext(), videoActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        // 녹화 목록 화면으로 넘어가는 기능
+        videoList.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(getApplicationContext(), cctvlistActivity.class);
+                startActivity(intent);
+            }
+        });
 
         final TextView clock = (TextView) findViewById(R.id.clock);
 

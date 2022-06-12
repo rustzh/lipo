@@ -28,7 +28,7 @@ public class cctvlistActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_cctvlist);
         if (!calledAlready)
         {
             FirebaseDatabase.getInstance().setPersistenceEnabled(true);
@@ -40,7 +40,7 @@ public class cctvlistActivity extends AppCompatActivity{
         adapter = new ArrayAdapter<String>(this, R.layout.activity_listitem, fileList);
         listView.setAdapter(adapter);
 
-        database = FirebaseDatabase.getInstance("gs://lipo-cf566.appspot.com/");
+        database = FirebaseDatabase.getInstance("gs://lipo-cf566.appspot.com");
         fileRef = database.getReference("videolist");
 
 
