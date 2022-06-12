@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference stateRef;
     String cctvState;
+    int IsRecording;
 
 //    public static Context context;
 
@@ -61,20 +62,38 @@ public class MainActivity extends AppCompatActivity {
         cctvOnButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                stateRef.child("cctv_state").setValue("on");
-                Intent intent = new Intent(getApplicationContext(), cctvActivity.class);
-                startActivity(intent);
+//                stateRef.child("cctv_state").setValue("on");
+                stateRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        IsRecording = snapshot.child("recording").getValue(Integer.class);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+                if (IsRecording == 0) {
+                    Intent intent = new Intent(getApplicationContext(), cctvActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(getApplicationContext(), recordingActivity.class);
+                    startActivity(intent);
+                }
+
             }
         });
 
-//        // 녹화 목록 화면으로 넘어가는 기능
-//        videoList.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View view){
-//                Intent intent = new Intent(getApplicationContext(), videoActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        // 녹화 목록 화면으로 넘어가는 기능
+        videoList.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(getApplicationContext(), AdapterActivity.class);
+                startActivity(intent);
+            }
+        });
 
         final TextView clock = (TextView) findViewById(R.id.clock);
 

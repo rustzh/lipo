@@ -17,6 +17,8 @@
 
         <activity android:name=".MainActivity" />
         <activity android:name=".cctvActivity" />
+        <activity android:name=".AdapterActivity" />
+        <activity android:name=".recordingActivity" />
 
         <activity
             android:name=".SplashActivity"
