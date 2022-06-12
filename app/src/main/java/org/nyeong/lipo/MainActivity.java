@@ -7,10 +7,14 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -81,11 +85,7 @@ public class MainActivity extends AppCompatActivity {
         videoList.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-<<<<<<< HEAD
-                Intent intent = new Intent(getApplicationContext(), cctvlistActivity.class);
-=======
                 Intent intent = new Intent(getApplicationContext(), AdapterActivity.class);
->>>>>>> 98df30698fe1096c7cf5d1f4a4439450e0e456d9
                 startActivity(intent);
             }
         });

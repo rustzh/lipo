@@ -1,7 +1,6 @@
 package org.nyeong.lipo;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,8 +11,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,10 +19,6 @@ import android.widget.ToggleButton;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,8 +27,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class cctvActivity extends AppCompatActivity {
 
@@ -93,7 +84,8 @@ public class cctvActivity extends AppCompatActivity {
         cctvWebSettings.setJavaScriptEnabled(true); // 웹페이지 자바 스틀비트 허용 여부
         cctvWebSettings.setLoadWithOverviewMode(true);
 
-        cctvWebView.loadUrl("192.168.0.48:8090/?action=stream"); // 웹뷰에 표시할 라즈베리파이 주소, 웹뷰 시작
+//        cctvWebView.loadUrl("192.168.0.48:8090/?action=stream"); // 웹뷰에 표시할 라즈베리파이 주소, 웹뷰 시작
+        cctvWebView.loadUrl("http://192.168.0.48:8080.strean");
 
         cctvWebView.setOnTouchListener(new View.OnTouchListener() {
             @Override

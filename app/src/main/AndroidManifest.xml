@@ -17,12 +17,8 @@
 
         <activity android:name=".MainActivity" />
         <activity android:name=".cctvActivity" />
-<<<<<<< HEAD
-        <activity android:name=".cctvlistActivity" />
-=======
         <activity android:name=".AdapterActivity" />
         <activity android:name=".recordingActivity" />
->>>>>>> 98df30698fe1096c7cf5d1f4a4439450e0e456d9
 
         <activity
             android:name=".SplashActivity"
