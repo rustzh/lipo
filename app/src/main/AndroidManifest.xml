@@ -4,6 +4,7 @@
     package="org.nyeong.lipo">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature android:name="android.hardware.sensor.stepdetector" />
 
     <application
@@ -14,25 +15,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:usesCleartextTraffic="true">
-
+        <activity
+            android:name=".test_imageActivity"
+            android:exported="false" />
         <activity android:name=".MainActivity" />
         <activity android:name=".cctvActivity" />
         <activity android:name=".AdapterActivity" />
         <activity android:name=".recordingActivity" />
 
+
+
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/SplashTheme"
+            android:exported="true"
             android:screenOrientation="portrait"
-            android:exported="true">
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
-
 
 </manifest>

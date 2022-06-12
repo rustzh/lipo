@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         videoList.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(getApplicationContext(), AdapterActivity.class);
+                Intent intent = new Intent(getApplicationContext(), test_imageActivity.class);
                 startActivity(intent);
             }
         });
