@@ -36,22 +36,17 @@ public class MainActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance("https://lipo-cf566-default-rtdb.firebaseio.com/");
         stateRef = database.getReference("state");
 
-        stateRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                cctvState = snapshot.child("cctv_state").getValue(String.class);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        if(cctvState == "on"){
-            finish();
-            startActivity(new Intent(getApplicationContext(), cctvActivity.class));
-        }
+//        stateRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                cctvState = snapshot.child("cctv_state").getValue(String.class);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
 
 
         // 버튼 받아오기
