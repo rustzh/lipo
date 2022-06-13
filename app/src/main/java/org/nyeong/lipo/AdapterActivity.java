@@ -17,6 +17,9 @@ import com.google.firebase.storage.StorageReference;
 
 public class AdapterActivity extends AppCompatActivity {
 
+    int count = 0;
+    String[] filename = new String[100];
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,32 +31,41 @@ public class AdapterActivity extends AppCompatActivity {
         storageRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
             @Override
             public void onSuccess(ListResult listResult) {
-                for (StorageReference item : listResult.getItems()){
-
-                    String filename = item.getName();
+                for (StorageReference item : listResult.getItems()) {
+                    count++;
+                    filename[count] = item.getName();
                     LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
                     Button btn = new Button(AdapterActivity.this);
-                    btn.setText(filename);
+                    btn.setId(count);
+                    btn.setText(filename[count]);
                     btn.setTextSize(30);
                     btn.setTextColor(Color.BLACK);
                     layout.addView(btn);
-                    System.out.println(filename);
+                    System.out.println(filename[count]);
+//                    btn.setOnClickListener(this);
                     btn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Toast.makeText(getApplicationContext(), "영상 선택", Toast.LENGTH_SHORT).show();
-                            System.out.println(filename);
+                            int i = v.getId();
+                            System.out.println("전달할 filename = " + filename[i]);
                             Intent intent = new Intent(getApplicationContext(), VideolistActivity.class);
-                            intent.putExtra("filename", filename);
+                            intent.putExtra("filename", filename[i]);
                             startActivity(intent);
                         }
                     });
                 }
-
             }
         });
-
-
-
     }
+
+//    @Override
+//    public void onClick(View v) {
+//        int i = v.getId();
+//        Toast.makeText(getApplicationContext(), "영상 선택", Toast.LENGTH_SHORT).show();
+//        System.out.println(filename[i]);
+//        Intent intent = new Intent(getApplicationContext(), VideolistActivity.class);
+//        intent.putExtra("filename", filename[i]);
+//        startActivity(intent);
+//    }
 }
