@@ -1,5 +1,6 @@
 package org.nyeong.lipo;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,11 +9,26 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
 
 public class VideolistActivity extends AppCompatActivity implements View.OnClickListener {
 
 //    public static final String VIDEO_URL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+
+    FirebaseStorage storage = FirebaseStorage.getInstance("gs://lipo-cf566.appspot.com");
+    StorageReference storageRef = storage.getReference();
 
     private VideoView videoView;
     private Button btnStart;
@@ -30,6 +46,50 @@ public class VideolistActivity extends AppCompatActivity implements View.OnClick
         btnResume = findViewById(R.id.btnResume);
         btnPause = findViewById(R.id.btnPause);
         btnStop = findViewById(R.id.btnStop);
+
+        Intent intent = getIntent();
+        String filename = intent.getStringExtra("filename");
+
+        try
+        {
+            File path = new File("C:\\Users\\user\\StudioProjects\\m_project\\last_lipo\\app\\src\\main\\res");
+            final File file = new File(path, filename);
+            try {
+                if (!path.exists()) {
+                    //저장할 폴더가 없으면 생성
+                    path.mkdirs();
+                }
+                file.createNewFile();
+
+                //파일을 다운로드하는 Task 생성, 비동기식으로 진행
+                final FileDownloadTask fileDownloadTask = storageRef.getFile(file);
+                fileDownloadTask.addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+//                        mImageView.setImageURI(Uri.fromFile(file));
+                        System.out.println("완료");
+//                        videoView = findViewById(R.id.videoView);
+////                        Uri videoUri = Uri.parse("android.resource://"+getPackageName()+ "/"+ )
+//                        Uri videoUri = file.getPath();
+
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                    }
+                }).addOnProgressListener(new OnProgressListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    //진행상태 표시
+                    public void onProgress(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    }
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }
 
         // 에뮬레이터로 확인하려면 내 프로젝트에 동영상 파일이 있어야 됨
 //        String VIDEO_PATH = "android.resource://" + getPackageName() + "/" + R.raw.night;
