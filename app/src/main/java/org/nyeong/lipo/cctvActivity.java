@@ -53,7 +53,7 @@ public class cctvActivity extends AppCompatActivity {
 
         Log.d(TAG, "Create CCTV Fragment");
 
-        cctvWebView = (WebView) findViewById(R.id.cctvWeb);
+//        cctvWebView = (WebView) findViewById(R.id.cctvWeb);
         callpolice = (ImageButton) findViewById(R.id.callpolice);
         recording = (ImageButton) findViewById(R.id.recoding);
         warning = (ImageButton) findViewById(R.id.warning);
@@ -62,7 +62,16 @@ public class cctvActivity extends AppCompatActivity {
         stateRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                IsRecording = snapshot.child("recording").getValue(Integer.class);
                 IsOutHome = snapshot.child("outhome").getValue(Integer.class);
+                if (IsRecording == 1){
+                    finish();
+                }
+                if (IsOutHome == 0) {
+                    toggleButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.home));
+                } else {
+                    toggleButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.out_home));
+                }
             }
 
             @Override
@@ -70,12 +79,6 @@ public class cctvActivity extends AppCompatActivity {
 
             }
         });
-
-        if (IsOutHome==0) {
-            toggleButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.home));
-        } else {
-            toggleButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.out_home));
-        }
 
 //        cctvWebSettings = cctvWebView.getSettings();
 //        cctvWebSettings.setUseWideViewPort(true);
