@@ -31,17 +31,17 @@ public class AdapterActivity extends AppCompatActivity {
         //listview 에 adapter 연결
         listView.setAdapter(arrayAdapter);
 
-//        for(int i=0; i<10; i++) {
-//            arrayList.add("Item " +i);
-//        }
-
-
+        for(int i=0; i<10; i++) {
+            arrayList.add("Item " +i);
+        }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
                 Toast.makeText(AdapterActivity.this, position + "번째 영상", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), VideolistActivity.class);
+                // putextra의 첫 값은 식별태그, 뒤에는 다음 화면으로 넘길 값
+//                intent.putExtra("", Integer.toString(arrayList.get(position).getProfile()));
                 startActivity(intent);
             }
         });
