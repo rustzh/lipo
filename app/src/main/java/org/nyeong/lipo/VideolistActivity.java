@@ -1,7 +1,10 @@
 package org.nyeong.lipo;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -48,50 +51,71 @@ public class VideolistActivity extends AppCompatActivity implements View.OnClick
 
         Intent intent = getIntent();
         String filename = intent.getStringExtra("filename");
+        System.out.println(filename);
 
-
-        try
-        {
-            File path = new File("C:\\Users\\user\\StudioProjects\\m_project\\last_lipo\\app\\src\\main\\res");
-            final File file = new File(path, filename);
-            try {
-                if (!path.exists()) {
-                    //저장할 폴더가 없으면 생성
-                    path.mkdirs();
-                }
-                file.createNewFile();
-
-                //파일을 다운로드하는 Task 생성, 비동기식으로 진행
-                final FileDownloadTask fileDownloadTask = storageRef.getFile(file);
-                fileDownloadTask.addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-//                        mImageView.setImageURI(Uri.fromFile(file));
-                        System.out.println("완료");
-//                        videoView = findViewById(R.id.videoView);
-////                        Uri videoUri = Uri.parse("android.resource://"+getPackageName()+ "/"+ )
-//                        Uri videoUri = file.getPath();
-
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                    }
-                }).addOnProgressListener(new OnProgressListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    //진행상태 표시
-                    public void onProgress(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    }
-                });
-            } catch (IOException e) {
-                e.printStackTrace();
+        StorageReference videoRef = storageRef.child(filename);
+        videoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                videoView.setVideoURI(uri);
             }
-        } catch(Exception e){
-            e.printStackTrace();
-        }
+        });
 
-        System.out.println("전달된 filename = " + filename);
+//        try{
+//            File path = new File("C:\\Users\\user\\StudioProjects\\m_project\\last_lipo\\app\\src\\main\\res");
+//            final File file = new File(path, filename);
+//            storageRef.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+//                @Override
+//                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+//                    Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.filename);
+//                }
+//            });
+//        }  catch (IOException e ) {}
+
+
+//        try
+//        {
+//            File path = new File("C:\\Users\\user\\StudioProjects\\m_project\\last_lipo\\app\\src\\main\\res");
+//            final File file = new File(path, filename);
+//            try {
+//                if (!path.exists()) {
+//                    //저장할 폴더가 없으면 생성
+//                    path.mkdirs();
+//                }
+//                file.createNewFile();
+//
+//                //파일을 다운로드하는 Task 생성, 비동기식으로 진행
+//                final FileDownloadTask fileDownloadTask = storageRef.getFile(file);
+//                fileDownloadTask.addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+//                    @Override
+//                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+////                        mImageView.setImageURI(Uri.fromFile(file));
+//                        System.out.println("완료");
+////                        videoView = findViewById(R.id.videoView);
+//////                        Uri videoUri = Uri.parse("android.resource://"+getPackageName()+ "/"+ )
+////                        Uri videoUri = file.getPath();
+//
+//
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception exception) {
+//                        System.out.println("실패");
+//                    }
+//                }).addOnProgressListener(new OnProgressListener<FileDownloadTask.TaskSnapshot>() {
+//                    @Override
+//                    //진행상태 표시
+//                    public void onProgress(FileDownloadTask.TaskSnapshot taskSnapshot) {
+//
+//                    }
+//                });
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        } catch(Exception e){
+//            e.printStackTrace();
+//        }
+
 
 
         // 에뮬레이터로 확인하려면 내 프로젝트에 동영상 파일이 있어야 됨
@@ -138,7 +162,9 @@ public class VideolistActivity extends AppCompatActivity implements View.OnClick
 
             case R.id.btnStop:
                 videoView.pause();
-                videoView.stopPlayback();   // 동영상 정지 (Resume 버튼 클릭하면 새로 실행)
+                videoView.stopPlayback();
+                Intent intent = new Intent(getApplicationContext(), AdapterActivity.class);
+                startActivity(intent);
                 break;
 
             default:
