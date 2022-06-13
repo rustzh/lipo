@@ -85,7 +85,7 @@ public class cctvActivity extends AppCompatActivity {
         cctvWebSettings.setLoadWithOverviewMode(true);
 
 //        cctvWebView.loadUrl("192.168.0.48:8090/?action=stream"); // 웹뷰에 표시할 라즈베리파이 주소, 웹뷰 시작
-        cctvWebView.loadUrl("http://192.168.0.48:8080.strean");
+        cctvWebView.loadUrl("http://192.168.0.48:8080/stream");
 
         cctvWebView.setOnTouchListener(new View.OnTouchListener() {
             @Override
