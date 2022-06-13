@@ -2,6 +2,7 @@ package org.nyeong.lipo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,14 +31,18 @@ public class AdapterActivity extends AppCompatActivity {
         //listview 에 adapter 연결
         listView.setAdapter(arrayAdapter);
 
-        for(int i=0; i<10; i++) {
-            arrayList.add("Item " +i);
-        }
+//        for(int i=0; i<10; i++) {
+//            arrayList.add("Item " +i);
+//        }
+
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
                 Toast.makeText(AdapterActivity.this, position + "번째 영상", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), VideolistActivity.class);
+                startActivity(intent);
             }
         });
     }

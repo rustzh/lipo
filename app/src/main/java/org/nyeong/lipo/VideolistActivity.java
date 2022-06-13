@@ -27,6 +27,7 @@ public class VideolistActivity extends AppCompatActivity {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference();
         StorageReference pathReference = storageReference.child("video");
+//        load = findViewById(R.id.)
         if (pathReference == null) {
             Toast.makeText(this, "저장소에 영상이 없습니다.", Toast.LENGTH_SHORT).show();
         } else {
