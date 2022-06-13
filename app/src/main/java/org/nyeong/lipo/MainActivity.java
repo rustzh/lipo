@@ -34,6 +34,17 @@ public class MainActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance("https://lipo-cf566-default-rtdb.firebaseio.com/");
         stateRef = database.getReference("state");
 
+        stateRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                IsRecording = snapshot.child("recording").getValue(Integer.class);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         // 버튼 받아오기
         ImageButton cctvOnButton = (ImageButton) findViewById(R.id.cctvOnButton);
         Button videoList = (Button) findViewById(R.id.videoList);
