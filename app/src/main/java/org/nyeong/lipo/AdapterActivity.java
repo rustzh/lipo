@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,53 +15,19 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
 
-import java.util.ArrayList;
-
 public class AdapterActivity extends AppCompatActivity {
-    ArrayList<String> arrayList;
-    ArrayAdapter arrayAdapter;
-    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.adapterview);
 
-        arrayList = new ArrayList<>();
         FirebaseStorage storage = FirebaseStorage.getInstance("gs://lipo-cf566.appspot.com");
         StorageReference storageRef = storage.getReference();
 
-        System.out.println("adapter 시작 전");
-        //Adapter 생성
-//        arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayList);
-
-//        listView = (ListView) findViewById(R.id.list_view);
-//        //listview 에 adapter 연결
-//        listView.setAdapter(arrayAdapter);
-
-        System.out.println("listall 시작 전");
-
-//        for(int i=0; i<10; i++) {
-//            arrayList.add("Item " +i);
-//        }
-
-//        // 업로드 test
-//        String fileName = "20220613-035009.mp4";
-//        storageRef.child(fileName).getMetadata().addOnSuccessListener(new OnSuccessListener<StorageMetadata>() {
-//            @Override
-//            public void onSuccess(StorageMetadata storageMetadata) {
-//                //String name = storageMetadata.getName(); // 이름 가져오기기
-//               arrayList.add(fileName);
-//            }
-//        });
         storageRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
             @Override
             public void onSuccess(ListResult listResult) {
-                System.out.println("onsuccess 시작");
-//                for (StorageReference prefix : listResult.getPrefixes()){
-//                    arrayList.add(prefix.getName());
-//                }
-
                 for (StorageReference item : listResult.getItems()){
 //                    String filename = item.getName();
 //                    arrayList.add(filename);
