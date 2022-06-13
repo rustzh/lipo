@@ -4,11 +4,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,9 +15,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
 
-import java.util.ArrayList;
-
 public class AdapterActivity extends AppCompatActivity {
+
+    int count = 0;
+    String[] filename = new String[100];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,43 +28,44 @@ public class AdapterActivity extends AppCompatActivity {
         FirebaseStorage storage = FirebaseStorage.getInstance("gs://lipo-cf566.appspot.com");
         StorageReference storageRef = storage.getReference();
 
-        System.out.println("adapter 시작 전");
-
-
-        System.out.println("listall 시작 전");
-
-
         storageRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
             @Override
             public void onSuccess(ListResult listResult) {
-                System.out.println("onsuccess 시작");
-
-                for (StorageReference item : listResult.getItems()){
-
-                    String filename = item.getName();
+                for (StorageReference item : listResult.getItems()) {
+                    count++;
+                    filename[count] = item.getName();
                     LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
                     Button btn = new Button(AdapterActivity.this);
-                    btn.setText(filename);
+                    btn.setId(count);
+                    btn.setText(filename[count]);
                     btn.setTextSize(30);
                     btn.setTextColor(Color.BLACK);
                     layout.addView(btn);
-                    System.out.println(filename);
+                    System.out.println(filename[count]);
+//                    btn.setOnClickListener(this);
                     btn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Toast.makeText(getApplicationContext(), "영상 선택", Toast.LENGTH_SHORT).show();
-                            System.out.println(filename);
+                            int i = v.getId();
+                            System.out.println("전달할 filename = " + filename[i]);
                             Intent intent = new Intent(getApplicationContext(), VideolistActivity.class);
-                            intent.putExtra("filename", filename);
+                            intent.putExtra("filename", filename[i]);
                             startActivity(intent);
                         }
                     });
                 }
-
             }
         });
-
-
-
     }
+
+//    @Override
+//    public void onClick(View v) {
+//        int i = v.getId();
+//        Toast.makeText(getApplicationContext(), "영상 선택", Toast.LENGTH_SHORT).show();
+//        System.out.println(filename[i]);
+//        Intent intent = new Intent(getApplicationContext(), VideolistActivity.class);
+//        intent.putExtra("filename", filename[i]);
+//        startActivity(intent);
+//    }
 }
