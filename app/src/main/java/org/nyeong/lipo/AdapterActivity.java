@@ -58,14 +58,4 @@ public class AdapterActivity extends AppCompatActivity {
             }
         });
     }
-
-//    @Override
-//    public void onClick(View v) {
-//        int i = v.getId();
-//        Toast.makeText(getApplicationContext(), "영상 선택", Toast.LENGTH_SHORT).show();
-//        System.out.println(filename[i]);
-//        Intent intent = new Intent(getApplicationContext(), VideolistActivity.class);
-//        intent.putExtra("filename", filename[i]);
-//        startActivity(intent);
-//    }
 }

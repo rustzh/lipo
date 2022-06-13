@@ -1,11 +1,7 @@
 package org.nyeong.lipo;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -23,8 +19,6 @@ public class recordingActivity extends AppCompatActivity {
     DatabaseReference stateRef;
 
     ImageButton recordingOffButton;
-
-    int IsRecording = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +59,7 @@ public class recordingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 stateRef.child("recording").setValue(0);
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 

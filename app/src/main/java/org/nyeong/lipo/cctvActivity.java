@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -37,8 +36,8 @@ public class cctvActivity extends AppCompatActivity {
     ImageButton callpolice, recording, warning;
     ToggleButton toggleButton;
 
-    WebView cctvWebView;  // 웹뷰 선언
-    WebSettings cctvWebSettings; // 웹뷰 세팅
+    WebView cctvWebView;
+    WebSettings cctvWebSettings;
     int IsOutHome = 0;
     boolean IsWarning = false;
     int IsRecording = 0;
@@ -78,24 +77,21 @@ public class cctvActivity extends AppCompatActivity {
             toggleButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.out_home));
         }
 
-        cctvWebSettings = cctvWebView.getSettings(); // 세부 세팅 등록
-
-        cctvWebSettings.setUseWideViewPort(true); // 화면 사이즈 맞추기 허용 여부
-        cctvWebSettings.setJavaScriptEnabled(true); // 웹페이지 자바 스틀비트 허용 여부
-        cctvWebSettings.setLoadWithOverviewMode(true);
-
-//        cctvWebView.loadUrl("192.168.0.48:8090/?action=stream"); // 웹뷰에 표시할 라즈베리파이 주소, 웹뷰 시작
-        cctvWebView.loadUrl("http://192.168.0.48:8080/stream");
-
-        cctvWebView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    cctvWebView.reload();
-                }
-                return true;
-            }
-        }); // WebView 터치 시 새로고침
+//        cctvWebSettings = cctvWebView.getSettings();
+//        cctvWebSettings.setUseWideViewPort(true);
+//        cctvWebSettings.setJavaScriptEnabled(true);
+//        cctvWebSettings.setLoadWithOverviewMode(true);
+//        cctvWebView.loadUrl("http://192.168.0.48:8080/stream");
+//        // 터치 시 새로고침
+//        cctvWebView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+//                    cctvWebView.reload();
+//                }
+//                return true;
+//            }
+//        });
 
         final TextView clock = (TextView) findViewById(R.id.clock);
 
@@ -141,17 +137,6 @@ public class cctvActivity extends AppCompatActivity {
         recording.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if(IsRecording == 0) {
-//                    stateRef.child("recording").setValue(1);
-//                    IsRecording = 1;
-//                    Toast.makeText(getApplicationContext(), "녹화 중", Toast.LENGTH_SHORT).show();
-//
-//                } else {
-//                    stateRef.child("recording").setValue(0);
-//                    IsRecording = 0;
-//                    Toast.makeText(getApplicationContext(), "녹화 종료", Toast.LENGTH_SHORT).show();
-//
-//                }
                 stateRef.child("recording").setValue(1);
                 IsRecording = 1;
                 Toast.makeText(getApplicationContext(), "녹화 중", Toast.LENGTH_SHORT).show();

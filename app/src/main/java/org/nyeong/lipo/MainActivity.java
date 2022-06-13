@@ -23,10 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference stateRef;
-    String cctvState;
     int IsRecording;
 
-//    public static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,19 +34,6 @@ public class MainActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance("https://lipo-cf566-default-rtdb.firebaseio.com/");
         stateRef = database.getReference("state");
 
-//        stateRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                cctvState = snapshot.child("cctv_state").getValue(String.class);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-
-
         // 버튼 받아오기
         ImageButton cctvOnButton = (ImageButton) findViewById(R.id.cctvOnButton);
         Button videoList = (Button) findViewById(R.id.videoList);
@@ -57,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         cctvOnButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-//                stateRef.child("cctv_state").setValue("on");
                 stateRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
