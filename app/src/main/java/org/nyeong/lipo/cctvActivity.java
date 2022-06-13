@@ -93,7 +93,8 @@ public class cctvActivity extends AppCompatActivity {
         cctvWebSettings.setJavaScriptEnabled(true); // 웹페이지 자바 스틀비트 허용 여부
         cctvWebSettings.setLoadWithOverviewMode(true);
 
-        cctvWebView.loadUrl("192.168.0.48:8090/?action=stream"); // 웹뷰에 표시할 라즈베리파이 주소, 웹뷰 시작
+//        cctvWebView.loadUrl("192.168.0.48:8090/?action=stream"); // 웹뷰에 표시할 라즈베리파이 주소, 웹뷰 시작
+        cctvWebView.loadUrl("http://192.168.0.48:8080/stream");
 
         cctvWebView.setOnTouchListener(new View.OnTouchListener() {
             @Override
