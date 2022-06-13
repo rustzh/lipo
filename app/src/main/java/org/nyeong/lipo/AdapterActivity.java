@@ -29,13 +29,10 @@ public class AdapterActivity extends AppCompatActivity {
             @Override
             public void onSuccess(ListResult listResult) {
                 for (StorageReference item : listResult.getItems()){
-//                    String filename = item.getName();
-//                    arrayList.add(filename);
-//                    System.out.println(filename);
+
                     String filename = item.getName();
                     LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
                     Button btn = new Button(AdapterActivity.this);
-//                    btn.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                     btn.setText(filename);
                     btn.setTextSize(30);
                     btn.setTextColor(Color.BLACK);
@@ -52,17 +49,10 @@ public class AdapterActivity extends AppCompatActivity {
                         }
                     });
                 }
+
             }
         });
 
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-//                Toast.makeText(AdapterActivity.this, position + "번째 영상", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(getApplicationContext(), VideolistActivity.class);
-//                startActivity(intent);
-//            }
-//        });
 
 
     }
